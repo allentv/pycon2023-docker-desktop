@@ -8,7 +8,8 @@ There is an online cookbook available [here](https://www.pysimplegui.org/en/late
 
 ## Workshop Agenda
 
-* Install requisites: Docker Desktop, VS Code, python packages
+* Introduction to the workshop
+* Install [dependencies](docs/install.md): Docker Desktop, VS Code, python packages
 * UI Walkthrough
 * PySimpleGUI introduction
 * Problem definition and breakdown
