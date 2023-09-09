@@ -13,7 +13,7 @@ There is an online cookbook available [here](https://www.pysimplegui.org/en/late
 * UI Walkthrough
 * PySimpleGUI introduction
 * Problem definition and breakdown
-* Exploring docker python package
 * Creating the UI
-* Connecting docker client output to the UI
+* Exploring docker python package
+* Connecting docker client to UI elements
 * Save user preferences
