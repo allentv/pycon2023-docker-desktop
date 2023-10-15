@@ -8,13 +8,16 @@ class DockerManager:
         self.client = get_client()
 
     def get_containers(self) -> list:
-        pass
+        # TODO: Add implementation
+        return []
 
     def get_images(self) -> list:
-        pass
+        # TODO: Add implementation
+        return []
 
     def get_volumes(self) -> list:
-        pass
+        # TODO: Add implementation
+        return []
 
 
 @lru_cache

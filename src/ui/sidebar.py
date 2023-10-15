@@ -3,31 +3,38 @@ import PySimpleGUI as sg
 
 class Sidebar:
     def __init__(self) -> None:
-        self.color = "gray"
+        self.color = self.color
 
     def get_layout(self):
         return [
-            [sg.Button("Containers")],
-            [sg.Button("Images")],
-            [sg.Button("Volumes")],
-            [
-                sg.Text(
-                    "Testing click...",
-                    enable_events=True,
-                    background_color="gray",
-                )
-            ],
             [
                 sg.Image(
                     filename="./src/ui/icons/container.png",
                     subsample=12,
-                    background_color="gray",
+                    background_color=self.color,
                     enable_events=True,
                 ),
                 sg.Text(
-                    "Next to image",
-                    background_color="gray",
+                    "Containers",
+                    background_color=self.color,
                     enable_events=True,
+                    key="-BTN-CONTAINER-",
                 ),
+            ],
+            [
+                sg.Text(
+                    "Images",
+                    enable_events=True,
+                    background_color=self.color,
+                    key="-BTN-IMAGES-",
+                )
+            ],
+            [
+                sg.Text(
+                    "Volumes",
+                    enable_events=True,
+                    background_color=self.color,
+                    key="-BTN-VOLUMES-",
+                )
             ],
         ]

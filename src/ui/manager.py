@@ -31,3 +31,14 @@ class AppUIManager:
     def process(self, event, values):
         # TODO: Handle button click events to load data
         print(event, values)
+
+        match event:
+            case "-BTN-CONTAINER-":
+                print("Clicked container button!")
+                self.info_obj.load("container")
+            case "-BTN-IMAGES-":
+                print("Clicked images button!")
+                self.info_obj.load("image")
+            case "-BTN-VOLUMES-":
+                print("Clicked volumes button!")
+                self.info_obj.load("volume")
