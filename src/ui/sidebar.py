@@ -17,4 +17,17 @@ class Sidebar:
                     background_color="gray",
                 )
             ],
+            [
+                sg.Image(
+                    filename="./src/ui/icons/container.png",
+                    subsample=12,
+                    background_color="gray",
+                    enable_events=True,
+                ),
+                sg.Text(
+                    "Next to image",
+                    background_color="gray",
+                    enable_events=True,
+                ),
+            ],
         ]
