@@ -9,7 +9,7 @@ class Info:
         self.docker_manager = DockerManager()
         self.table_data = []
 
-    def get_layout(self):
+    def get_layout(self) -> list[list]:
         # TODO: Populate table data when available
         return [
             [
@@ -17,7 +17,7 @@ class Info:
             ]
         ]
 
-    def load(self, target: str):
+    def load(self, target: str) -> None:
         match target:
             case "container":
                 self.table_data = self.docker_manager.get_containers()
@@ -25,3 +25,5 @@ class Info:
                 self.table_data = self.docker_manager.get_images()
             case "volume":
                 self.table_data = self.docker_manager.get_volumes()
+
+        # TODO: Update the table component with the new data

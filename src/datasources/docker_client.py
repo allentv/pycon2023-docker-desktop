@@ -5,7 +5,9 @@ import docker
 
 class DockerManager:
     def __init__(self) -> None:
-        self.client = get_client()
+        # Comment out the below line to avoid connecting to Docker service
+        # self.client = get_client()
+        self.client = None
 
     def get_containers(self) -> list:
         # TODO: Add implementation
@@ -21,5 +23,5 @@ class DockerManager:
 
 
 @lru_cache
-def get_client():
+def get_client() -> docker.DockerClient:
     return docker.from_env()
