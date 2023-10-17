@@ -8,23 +8,27 @@ class Info(LayoutBase):
     def __init__(self) -> None:
         self.color = "white"
         self.docker_manager = DockerManager()
-        self.table_data = []
+        self.table = sg.Table(values=[], headings=[])
 
     def get_layout(self) -> list[list]:
         # TODO: Populate table data when available
-        return [
-            [
-                sg.Text("More Info"),
-            ]
-        ]
+        return [[self.table]]
+
+    def update_table_content(self, headings: list[str], content: list[list]):
+        # TODO: Update the table component with the new data
+        self.table.ColumnHeadings = headings
+        self.table.update(content)
 
     def load(self, target: str) -> None:
         match target:
             case "container":
-                self.table_data = self.docker_manager.get_containers()
+                table_data = self.docker_manager.get_containers()
+                headings = []
             case "image":
-                self.table_data = self.docker_manager.get_images()
+                table_data = self.docker_manager.get_images()
+                headings = []
             case "volume":
-                self.table_data = self.docker_manager.get_volumes()
+                table_data = self.docker_manager.get_volumes()
+                headings = []
 
-        # TODO: Update the table component with the new data
+        self.update_table_content(headings, table_data)
