@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 
 from datasources.docker_client import DockerManager
+from ui.base import LayoutBase
 
 
-class Info:
+class Info(LayoutBase):
     def __init__(self) -> None:
         self.color = "white"
         self.docker_manager = DockerManager()

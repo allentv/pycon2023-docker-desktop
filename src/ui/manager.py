@@ -1,16 +1,22 @@
+"""
+This module takes care of the UI elements to be rendered and handles the events raised by these elements
+"""
+
+
 import PySimpleGUI as sg
 
+from ui.base import LayoutBase
 from ui.info import Info
 from ui.sidebar import Sidebar
 
 
-class AppUIManager:
+class AppUIManager(LayoutBase):
     def __init__(self) -> None:
         self.sidebar_obj = Sidebar()
         self.info_obj = Info()
 
-    def render(self) -> sg.Window:
-        layout = [
+    def get_layout(self) -> list[list]:
+        return [
             [
                 sg.Column(
                     self.sidebar_obj.get_layout(),
@@ -28,7 +34,9 @@ class AppUIManager:
                 ),
             ]
         ]
-        return sg.Window("PyDocker", layout, size=(800, 800), margins=(0, 0), finalize=True)
+
+    def render(self) -> sg.Window:
+        return sg.Window("PyDocker", self.get_layout(), size=(800, 800), margins=(0, 0), finalize=True)
 
     def process(self, event, values) -> None:
         # TODO: Handle button click events to load data
