@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from datasources.docker_client import DockerManager
 from ui.base import LayoutBase
-from ui.models import process_image_info
+from ui.models import process_container_info, process_image_info, process_volume_info
 
 
 class Info(LayoutBase):
@@ -13,7 +13,7 @@ class Info(LayoutBase):
         # Table headings cannot be changed dynamically. So create beforehand and hide them
         self.table_container = sg.Table(
             values=[],
-            headings=["1", "2", "3"],
+            headings=["Name", "Image", "Status"],
             expand_x=True,
             visible=False,
         )
@@ -25,7 +25,7 @@ class Info(LayoutBase):
         )
         self.table_volumes = sg.Table(
             values={},
-            headings=["Name", "Created", "Size"],
+            headings=["Name", "Created"],
             expand_x=True,
             visible=False,
         )
@@ -40,12 +40,13 @@ class Info(LayoutBase):
     def load(self, target: str) -> None:
         match target:
             case "container":
-                table_data = self.docker_manager.get_containers()
+                table_data = process_container_info(self.docker_manager.get_containers())
             case "image":
                 table_data = process_image_info(self.docker_manager.get_images())
             case "volume":
-                table_data = self.docker_manager.get_volumes()
+                table_data = process_volume_info(self.docker_manager.get_volumes())
 
+        # Toggle visibilty of the tables based on the user choice
         self.table_container.update(values=table_data, visible=(target == "container"))
         self.table_images.update(values=table_data, visible=(target == "image"))
         self.table_volumes.update(values=table_data, visible=(target == "volume"))

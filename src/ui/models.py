@@ -22,3 +22,33 @@ def process_image_info(images_info: list):
         )
 
     return result
+
+
+def process_container_info(containers_info: list):
+    result = list()
+
+    for container_info in containers_info:
+        result.append(
+            [
+                container_info.name,
+                container_info.image,
+                container_info.status,
+            ]
+        )
+
+    return result
+
+
+def process_volume_info(volumes_info: list):
+    result = list()
+
+    for volume_info in volumes_info:
+        created = dt.strptime(volume_info.attrs["CreatedAt"].split("T")[0], "%Y-%m-%d")
+        result.append(
+            [
+                volume_info.attrs["Name"],
+                humanize.naturaldelta(dt.now() - created),
+            ]
+        )
+
+    return result

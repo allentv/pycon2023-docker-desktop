@@ -39,7 +39,6 @@ class AppUIManager(LayoutBase):
         return sg.Window("PyDocker", self.get_layout(), size=(800, 800), margins=(0, 0), finalize=True)
 
     def process(self, event, values) -> None:
-        # TODO: Handle button click events to load data
         print(event, values)
 
         match event:
