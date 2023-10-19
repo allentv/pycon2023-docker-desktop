@@ -5,21 +5,16 @@ import docker
 
 class DockerManager:
     def __init__(self) -> None:
-        # Comment out the below line to avoid connecting to Docker service
-        # self.client = get_client()
-        self.client = None
+        self.client = get_client()
 
     def get_containers(self) -> list:
-        # TODO: Add implementation
-        return []
+        return self.client.containers.list()
 
     def get_images(self) -> list:
-        # TODO: Add implementation
-        return []
+        return self.client.images.list()
 
     def get_volumes(self) -> list:
-        # TODO: Add implementation
-        return []
+        return self.client.volumes.list()
 
 
 @lru_cache
