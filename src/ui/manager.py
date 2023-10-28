@@ -44,6 +44,7 @@ class AppUIManager(LayoutBase):
             finalize=True,
             grab_anywhere_using_control=True,
             debugger_enabled=True,
+            font=("Arial", 16, ""),
         )
 
     def process(self, event, values) -> None:

@@ -19,6 +19,7 @@ class Info(LayoutBase):
             row_height=24,
             justification="left",
             key="-CONTAINER_TABLE-",
+            num_rows=5,
         )
         self.table_images = sg.Table(
             values={},
@@ -29,6 +30,7 @@ class Info(LayoutBase):
             justification="left",
             enable_events=True,
             key="-IMAGES_TABLE-",
+            num_rows=5,
         )
         self.table_volumes = sg.Table(
             values={},
@@ -38,6 +40,7 @@ class Info(LayoutBase):
             row_height=24,
             justification="center",
             key="-VOLUMES_TABLE-",
+            num_rows=8,
         )
 
     def get_layout(self) -> list[list]:
@@ -50,7 +53,9 @@ class Info(LayoutBase):
     def load(self, target: str) -> None:
         match target:
             case "container":
-                table_data = process_container_info(self.docker_manager.get_containers())
+                table_data = process_container_info(
+                    self.docker_manager.get_containers()
+                )
             case "image":
                 table_data = process_image_info(self.docker_manager.get_images())
             case "volume":
