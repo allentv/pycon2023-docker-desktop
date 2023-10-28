@@ -36,7 +36,15 @@ class AppUIManager(LayoutBase):
         ]
 
     def render(self) -> sg.Window:
-        return sg.Window("PyDocker", self.get_layout(), size=(800, 800), margins=(0, 0), finalize=True)
+        return sg.Window(
+            "PyDocker",
+            self.get_layout(),
+            size=(800, 400),
+            margins=(0, 0),
+            finalize=True,
+            grab_anywhere_using_control=True,
+            debugger_enabled=True,
+        )
 
     def process(self, event, values) -> None:
         print(event, values)

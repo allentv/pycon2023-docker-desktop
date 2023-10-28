@@ -16,4 +16,4 @@ There is an online cookbook available [here](https://www.pysimplegui.org/en/late
 * Creating the UI
 * Exploring docker python package
 * Connecting docker client to UI elements
-* Save user preferences
+* Trigger actions in a table

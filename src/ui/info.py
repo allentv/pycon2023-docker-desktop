@@ -16,18 +16,28 @@ class Info(LayoutBase):
             headings=["Name", "Image", "Status"],
             expand_x=True,
             visible=False,
+            row_height=24,
+            justification="left",
+            key="-CONTAINER_TABLE-",
         )
         self.table_images = sg.Table(
             values={},
             headings=["Image", "Commit", "Tag", "Size", "Created"],
             expand_x=True,
             visible=False,
+            row_height=24,
+            justification="left",
+            enable_events=True,
+            key="-IMAGES_TABLE-",
         )
         self.table_volumes = sg.Table(
             values={},
             headings=["Name", "Created"],
             expand_x=True,
             visible=False,
+            row_height=24,
+            justification="center",
+            key="-VOLUMES_TABLE-",
         )
 
     def get_layout(self) -> list[list]:
