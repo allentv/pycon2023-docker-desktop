@@ -10,4 +10,3 @@ Through the course of the workshop, we will be developing a simplified version o
 
 * Manage docker images: View and download
 * Manage containers: Start, view and logging
-* Save user settings
