@@ -15,22 +15,48 @@ class Sidebar(LayoutBase):
         # Container button row
         btn_container = [
             sg.Image(
-                filename=icons_path / "container.png",
+                filename=icons_path / "stack-icon.png",
                 background_color=self.color,
                 subsample=12,
                 enable_events=True,
             ),
-            sg.Text("Containers", background_color=self.color, enable_events=True, key="-BTN-CONTAINER-"),
+            sg.Text(
+                "Containers",
+                background_color=self.color,
+                enable_events=True,
+                key="-BTN-CONTAINER-",
+            ),
         ]
 
         # Images button row
         btn_images = [
-            sg.Image(filename=icons_path / "images.png", subsample=10, enable_events=True),
-            sg.Text("Images", enable_events=True, background_color=self.color, key="-BTN-IMAGES-"),
+            sg.Image(
+                filename=icons_path / "archive-icon.png",
+                subsample=12,
+                enable_events=True,
+            ),
+            sg.Text(
+                "Images",
+                enable_events=True,
+                background_color=self.color,
+                key="-BTN-IMAGES-",
+            ),
         ]
 
         # Volumes button row
-        btn_volumes = [sg.Text("Volumes", enable_events=True, background_color=self.color, key="-BTN-VOLUMES-")]
+        btn_volumes = [
+            sg.Image(
+                filename=icons_path / "database-db-icon.png",
+                subsample=12,
+                enable_events=True,
+            ),
+            sg.Text(
+                "Volumes",
+                enable_events=True,
+                background_color=self.color,
+                key="-BTN-VOLUMES-",
+            ),
+        ]
 
         # Use a column to adding padding and background color
         return [
