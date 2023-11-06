@@ -51,17 +51,22 @@ class Info(LayoutBase):
         ]
 
     def load(self, target: str) -> None:
+        is_container = False
+        is_image = False
+        is_volume = False
+
         match target:
             case "container":
-                table_data = process_container_info(
-                    self.docker_manager.get_containers()
-                )
+                table_data = process_container_info(self.docker_manager.get_containers())
+                is_container = True
             case "image":
                 table_data = process_image_info(self.docker_manager.get_images())
+                is_image = True
             case "volume":
                 table_data = process_volume_info(self.docker_manager.get_volumes())
+                is_volume = True
 
         # Toggle visibilty of the tables based on the user choice
-        self.table_container.update(values=table_data, visible=(target == "container"))
-        self.table_images.update(values=table_data, visible=(target == "image"))
-        self.table_volumes.update(values=table_data, visible=(target == "volume"))
+        self.table_container.update(values=table_data if is_container else None, visible=is_container)
+        self.table_images.update(values=table_data if is_image else None, visible=is_image)
+        self.table_volumes.update(values=table_data if is_volume else None, visible=is_volume)
