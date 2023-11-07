@@ -32,6 +32,38 @@ class Info(LayoutBase):
             key="-IMAGES_TABLE-",
             num_rows=5,
         )
+        self.images_actions = sg.Frame(
+            "Actions",
+            [
+                [
+                    sg.Button(
+                        "Start Container",
+                        button_color=sg.GREENS[0],
+                        enable_events=True,
+                        key="-IMAGES-SECTION-START-CONTAINER-",
+                    )
+                ],
+                [
+                    sg.Text("Enter docker image name"),
+                    sg.Input(
+                        default_text="",
+                        focus=True,
+                        key="-IMAGES-SECTION-IMAGE-NAME-",
+                    ),
+                    sg.Button(
+                        "Download",
+                        button_color=sg.BLUES[1],
+                        enable_events=True,
+                        key="-IMAGES-SECTION-DOWNLOAD-IMAGE-",
+                    ),
+                ],
+            ],
+            expand_x=True,
+            expand_y=True,
+            p=10,
+            visible=False,
+            background_color="gray",
+        )
         self.table_volumes = sg.Table(
             values={},
             headings=["Name", "Created"],
@@ -48,6 +80,7 @@ class Info(LayoutBase):
         # when the visibility is toggled
         return [
             [self.table_container, self.table_images, self.table_volumes],
+            [self.images_actions],
         ]
 
     def load(self, target: str) -> None:
@@ -69,4 +102,5 @@ class Info(LayoutBase):
         # Toggle visibilty of the tables based on the user choice
         self.table_container.update(values=table_data if is_container else None, visible=is_container)
         self.table_images.update(values=table_data if is_image else None, visible=is_image)
+        self.images_actions.update(visible=is_image)
         self.table_volumes.update(values=table_data if is_volume else None, visible=is_volume)
