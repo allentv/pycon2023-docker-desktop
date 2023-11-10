@@ -16,10 +16,15 @@ class DockerManager:
     def get_volumes(self) -> list:
         return self.client.volumes.list()
 
-    def pull_images(self, name):
+    def pull_images(self, name) -> None:
         assert len(name) > 0
         tag = name.split(":")[1] if ":" in name else "latest"
-        return self.client.api.pull(name, tag)
+        self.client.api.pull(name, tag)
+
+    def run_container(self, image_name) -> None:
+        assert len(image_name) > 0
+        container = self.client.api.create_container(image_name, "sleep 120")
+        self.client.api.start(container.get("Id"))
 
 
 @lru_cache

@@ -9,6 +9,7 @@ from datasources.docker_client import DockerManager
 
 from ui.base import LayoutBase
 from ui.info import Info
+from ui.models import process_image_info
 from ui.sidebar import Sidebar
 
 
@@ -50,8 +51,18 @@ class AppUIManager(LayoutBase):
             font=("Arial", 16, ""),
         )
 
+    def run_container(self, image_idx) -> None:
+        print(f"Image idx is: '{image_idx}'")
+        images = process_image_info(self.docker_manager.get_images())
+        image_name = images[image_idx][0]
+
+        print(f"Image name is: '{image_name}'")
+        self.docker_manager.run_container(image_name)
+
     def download_image(self, image_name) -> None:
         self.docker_manager.pull_images(image_name)
+
+        # Reload the list of images
         self.info_obj.load("image")
 
     def process(self, event, values) -> None:
@@ -67,5 +78,9 @@ class AppUIManager(LayoutBase):
             case "-BTN-VOLUMES-":
                 print("Clicked volumes button!")
                 self.info_obj.load("volume")
+            case "-IMAGES-SECTION-START-CONTAINER-":
+                print("Clicked start container button!")
+                self.run_container(values["-IMAGES_TABLE-"][0])
             case "-IMAGES-SECTION-DOWNLOAD-IMAGE-":
+                print("Clicked download image button!")
                 self.download_image(values["-IMAGES-SECTION-IMAGE-NAME-"])

@@ -32,7 +32,8 @@ def process_container_info(containers_info: list):
     return [
         [
             container_info.name,
-            container_info.image,
+            # Image name appears as: <Image: 'alpine:latest'>
+            str(container_info.image).replace("<Image: '", "").replace("'>", ""),
             container_info.status,
         ]
         for container_info in containers_info
