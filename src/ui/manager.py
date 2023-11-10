@@ -5,6 +5,8 @@ This module takes care of the UI elements to be rendered and handles the events 
 
 import PySimpleGUI as sg
 
+from datasources.docker_client import DockerManager
+
 from ui.base import LayoutBase
 from ui.info import Info
 from ui.sidebar import Sidebar
@@ -13,7 +15,8 @@ from ui.sidebar import Sidebar
 class AppUIManager(LayoutBase):
     def __init__(self) -> None:
         self.sidebar_obj = Sidebar()
-        self.info_obj = Info()
+        self.docker_manager = DockerManager()
+        self.info_obj = Info(self.docker_manager)
 
     def get_layout(self) -> list[list]:
         return [
@@ -47,6 +50,10 @@ class AppUIManager(LayoutBase):
             font=("Arial", 16, ""),
         )
 
+    def download_image(self, image_name) -> None:
+        self.docker_manager.pull_images(image_name)
+        self.info_obj.load("image")
+
     def process(self, event, values) -> None:
         print(event, values)
 
@@ -60,3 +67,5 @@ class AppUIManager(LayoutBase):
             case "-BTN-VOLUMES-":
                 print("Clicked volumes button!")
                 self.info_obj.load("volume")
+            case "-IMAGES-SECTION-DOWNLOAD-IMAGE-":
+                self.download_image(values["-IMAGES-SECTION-IMAGE-NAME-"])

@@ -16,6 +16,11 @@ class DockerManager:
     def get_volumes(self) -> list:
         return self.client.volumes.list()
 
+    def pull_images(self, name):
+        assert len(name) > 0
+        tag = name.split(":")[1] if ":" in name else "latest"
+        return self.client.api.pull(name, tag)
+
 
 @lru_cache
 def get_client() -> docker.DockerClient:

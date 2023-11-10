@@ -6,9 +6,9 @@ from ui.models import process_container_info, process_image_info, process_volume
 
 
 class Info(LayoutBase):
-    def __init__(self) -> None:
+    def __init__(self, docker_manager: DockerManager) -> None:
         self.color = "white"
-        self.docker_manager = DockerManager()
+        self.docker_manager = docker_manager
 
         # Table headings cannot be changed dynamically. So create beforehand and hide them
         self.table_container = sg.Table(
@@ -48,6 +48,7 @@ class Info(LayoutBase):
                     sg.Input(
                         default_text="",
                         focus=True,
+                        size=(30, 1),
                         key="-IMAGES-SECTION-IMAGE-NAME-",
                     ),
                     sg.Button(
